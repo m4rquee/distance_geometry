@@ -79,10 +79,20 @@ void method() {
         if (model.get(GRB_IntAttr_SolCount) == 0) throw GRBException("Could not obtain a solution!", -1);
 
         cout << "Vertex coordinates:" << endl;
-        for (int i = 0; i < n; i++)
+        cerr << n << " " << m << endl;
+        for (int i = 0; i < n; i++) {
             cout << i + 1 << "th vtx - (" << X[i].get(GRB_DoubleAttr_X) << "; " << Y[i].get(GRB_DoubleAttr_X)
                  << "; " << Z[i].get(GRB_DoubleAttr_X) << ")" << endl;
+
+            cerr << X[i].get(GRB_DoubleAttr_X) << " " << Y[i].get(GRB_DoubleAttr_X) << " "
+                 << Z[i].get(GRB_DoubleAttr_X) << " ";// print vertices to output file
+        }
+        cerr << endl;
         cout << "- Disimilarity Cost " << model.getObjective().getValue() << endl;
+
+        for (int e = 0; e < m; e++)// print edges to ouput file
+            cerr << E[e][0] << " " << E[e][1] << " ";
+        cerr << endl;
     } catch (GRBException &e) {
         cout << "Error number: " << e.getErrorCode() << endl;
         cout << e.getMessage() << endl;

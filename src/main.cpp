@@ -13,7 +13,10 @@ string itos(int i) {
 void read_graph(int &n, int &m, double (**E)[3]) {
     cin >> n >> m;
     *E = new double[m][3];
-    for (int i = 0; i < m; i++) cin >> (*E)[i][0] >> (*E)[i][1] >> (*E)[i][2];
+    for (int i = 0; i < m; i++) {
+        cin >> (*E)[i][0] >> (*E)[i][1] >> (*E)[i][2];
+        (*E)[i][0]--, (*E)[i][1]--;// the edges in the input file starts at one
+    }
 }
 
 void method() {
@@ -49,9 +52,9 @@ void method() {
         model.setObjective(obj);
 
         for (int i = 0; i < n; i++) {
-            X[i] = model.addVar(0.0, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "x_" + itos(i));
-            Y[i] = model.addVar(0.0, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "y_" + itos(i));
-            Z[i] = model.addVar(0.0, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "z_" + itos(i));
+            X[i] = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "x_" + itos(i));
+            Y[i] = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "y_" + itos(i));
+            Z[i] = model.addVar(-GRB_INFINITY, GRB_INFINITY, 0.0, GRB_CONTINUOUS, "z_" + itos(i));
         }
         model.update();// run update to use model inserted variables
 

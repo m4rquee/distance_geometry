@@ -26,6 +26,7 @@ elif m_extra == 'nsqrt':
 else:
     raise ValueError('Invalid number of extra edges!')
 m = int(m_extra + n_points - 1)
+m = min(m, (n - 1) * n // 2)
 print(n_points, m)
 
 

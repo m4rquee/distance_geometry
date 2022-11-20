@@ -43,5 +43,8 @@ fig.add_scatter3d(x=x_edges, y=y_edges, z=z_edges,
                   mode='lines', line=dict(color='black', width=2))
 fig.add_scatter3d(x=coordinates[:, 0], y=coordinates[:, 1], z=coordinates[:, 2],
                   mode='markers', marker=dict(symbol='circle', size=3, color='green'))
-show_in_window(fig)  # show in a separete windown
-# fig.show()  # show in browser
+
+if 'win' in sys.argv:
+    show_in_window(fig)  # show in a separete windown
+else:
+    fig.show()  # show in browser
